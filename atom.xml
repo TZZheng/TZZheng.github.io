@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tianzhe&#39;s blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-06-14T07:59:38.060Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Tianzhe Zheng</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo+GitHub User Manuel</title>
+    <link href="http://yoursite.com/2018/06/13/Hexo+GitHub/"/>
+    <id>http://yoursite.com/2018/06/13/Hexo+GitHub/</id>
+    <published>2018-06-13T11:16:37.000Z</published>
+    <updated>2018-06-14T07:59:38.060Z</updated>
+    
+    <content type="html"><![CDATA[<p>按理讲在GitHub被巨硬收购以后是不是该弃用GitHub，不过真的挺好用的还是先用着吧:)<br>今天花了一点时间配置Hexo，记录一下自己的配置过程：</p><h1 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h1><p>首先申请GitHub账号，具体过程略；  </p><h2 id="在本地配置GitHub"><a href="#在本地配置GitHub" class="headerlink" title="在本地配置GitHub"></a>在本地配置GitHub</h2><p>首先要下载<a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>,安装基本都是默认的就可以了。<br>然后要配置一下SSH，具体方法就是在本地先生成一个SSH的秘钥，之后再在GitHub的SSH配置里将本地文件中C:\Users\Your account.ssh\id_rsa.pub的文件内容复制进去即可。 </p><h1 id="建立博客"><a href="#建立博客" class="headerlink" title="建立博客"></a>建立博客</h1><p>还需要安装<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>,下载安装包安装即可。<br>之后在你要求的文件夹右键点击Git Bash Here,然后开始准备安装<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>。Hexo是一个基于Node.js的静态博客框架，可以使用Markdown写博客，在几秒钟生成具有美观主题的静态文档。<br>首先在任意地方点击右键出现Git Bash Here,输入  </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>如果安装过程中遇到了以下错误：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR Deployer not found : git</span><br></pre></td></tr></table></figure><p>那么就执行</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>然后打开准备的博客文件夹点击Git Bash Here,开始Hexo的搭建</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt; #你的个人博客文件夹名</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install #安装依赖包</span><br></pre></td></tr></table></figure><p>这个时候博客就建立完成了，接下来可以看看自己的博客长什么样子了！</p><h1 id="预览博客"><a href="#预览博客" class="headerlink" title="预览博客"></a>预览博客</h1><p>预览博客的方法要着重提一下，首先生成静态文件：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g #g代表generate</span><br><span class="line">hexo s #s代表server</span><br></pre></td></tr></table></figure><p>如果没有报错的话，此时在浏览器输入<a href="https://localhost:/" target="_blank" rel="noopener">https://localhost:/</a> ，即可看到生成的博客页面！</p><h1 id="上传到GitHub"><a href="#上传到GitHub" class="headerlink" title="上传到GitHub"></a>上传到GitHub</h1><p>创建一个仓库Yourname.github.io(Yourname是你的账户名)。<br>最后，需要将文件推送到GitHub上，首先打开站点配置文件<code>_config.yml</code>，找到最后的<code>deploy</code>属性，将配置修改为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git #推送方式</span><br><span class="line">    repository: https://github.com/Yourname/Yourname.github.io.git</span><br><span class="line">    branch: master #你要推送的分支</span><br></pre></td></tr></table></figure><p>注意属性后面的冒号必须有一个空格。<br>接下来可以通过命令将服务部署到GitHub上  </p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean #清理文件</span><br><span class="line">hexo g</span><br><span class="line">hexo d #deploy</span><br></pre></td></tr></table></figure><p>如果没有问题的话，此时应当弹出你的GitHub,输入你的用户名和密码。如果提示如下错误：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR Deployer not found : git</span><br></pre></td></tr></table></figure><p>那么再次运行</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>过那么一两分钟就可以看到博客啦！  </p><h1 id="上传新的博客"><a href="#上传新的博客" class="headerlink" title="上传新的博客"></a>上传新的博客</h1><p>在博客文件夹里面执行以下命令：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hexo <span class="keyword">new</span> yourpost</span><br></pre></td></tr></table></figure><p>之后会在<code>/source/_post</code>下面找到<code>yourpost.md</code>,之后可以在里面修改题目并且开始写文章。</p><h1 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h1><p>想要更换主题，首先必须下载一个主题，可以从GitHub上进行克隆，例如<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">Next</a>主题：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next theme/next</span><br></pre></td></tr></table></figure><p>然后在博客的<code>_config.yml</code>文件里进行修改themes为你的主题名字即可。<br>注：因为觉得平常有很多东西当初看过了以后也就忘掉了，因此以后有的时候也会记录在这里-_-|||。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;按理讲在GitHub被巨硬收购以后是不是该弃用GitHub，不过真的挺好用的还是先用着吧:)&lt;br&gt;今天花了一点时间配置Hexo，记录一下自己的配置过程：&lt;/p&gt;
+&lt;h1 id=&quot;配置GitHub&quot;&gt;&lt;a href=&quot;#配置GitHub&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/06/13/hello-world/"/>
+    <id>http://yoursite.com/2018/06/13/hello-world/</id>
+    <published>2018-06-13T08:32:33.285Z</published>
+    <updated>2018-06-13T08:32:33.285Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
